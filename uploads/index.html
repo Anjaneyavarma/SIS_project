@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <script src="https://dpdpone.syfpos.com/mpp/UniFi.js"></script>
+    </head>
+    <body>
+        <p id="paragraph">kejfadasncanca</p>
+    </body>
+    <script type="text/javaScript">
+
+        var jsonObject;
+
+        console.log("jsonObject ===== "+ jsonObject)
+
+        function loadJsonData(data){
+            jsonObject = data
+            console.log("jsonObject === "+ jsonObject)
+            let para = document.getElementById("paragraph")
+            para.textContent = jsonObject
+            syfMPP.openMPPOfferModal(jsonObject)
+        }
+
+        window.onload = function () {
+            loadJsonData({"amount":"1300","pcgc":"GR10","partnerId":"P153421676"})
+            console.log(jsonObject)
+        //     // let jsonVariable = JSON.parse(jsonObject)
+        //     // console.log("jsonObject ===== "+ jsonVariable)
+        //     // console.log("jsonObject ===== "+ JSON.stringify(jsonVariable))
+        //     // let jsonString = JSON.stringify(jsonVariable)
+        //     // console.log("jsonString ===== "+ jsonString)
+            if(syfMPP){
+                syfMPP.calldBuyProcess(null, jsonObject)
+                
+            }
+        //     // 
+        }
+
+        // window.onload = async function(){
+
+        //     const api_url = "https://omni-apply.app.qa.pcf.syfbank.com/omniApply/application-link"
+        //     await fetch(api_url, {
+        //         method: "POST",
+        //         headers:{
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify({
+        //             "waterfallFinance":"N",
+        //             "applicantInfo":{
+        //                 "emailAddress":"penumatsa.anjaneyavarma@syf.com",
+        //                 "saleAmount":"999",
+        //                 "initialPurchaseAmount":999
+        //             },
+        //             "merchantInfo":{
+        //                 "associateId": "N123456",
+        //                 "merchantName": "SYF ZETAIL Merchant",
+        //                 "productName":"ZETAIL VISA Rewards Card",
+        //                 "channelId":"BC",
+        //                 "productCodeGroupCode":"A600",
+        //                 "merchantId":"5348120820046126",
+        //                 "storeMid":"5348120820030393",
+        //                 "partnerId":"PI1000011702"
+        //             },
+        //             "strategyInfo":{
+        //                 "viaCode":"H"
+        //             },
+        //             "deliveryMethod":"EMAIL_AND_MERCHANT",
+        //             "d2dUrl":"https://qpdpone.syfpos.com/mppcore/d2d",
+        //             "applicationType":"MPP"
+        //         })
+        //     }).then(reponse => reponse.json()).then(res => console.log(res)).catch(error => {
+        //         console.log(error)
+        //     })
+        // }
+
+        function onCloseModal(){
+            var dataToSend = "syf-modal-close"
+            window.webkit.messageHandlers.jsMessageHandler.postMessage(dataToSend);
+        }
+
+    </script>
+</html>
